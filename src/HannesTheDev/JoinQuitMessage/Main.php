@@ -230,7 +230,7 @@ class Main extends PluginBase implements Listener
         if ($config->exists("quidmessages." . $player->getName())) {
             $nachricht = $config->get("quidmessages." . $player->getName());
             if ($player->hasPermission("jqn.colored.message")) {
-                $event->setQuitMessage("§8[§c-§8] " . $nachricht);
+                $event->setQuitMessage("§8[§c-§8] §r" . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
                 $event->setQuitMessage("§8[§c-§8] §6" . $nachricht);
