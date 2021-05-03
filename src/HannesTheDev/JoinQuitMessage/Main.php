@@ -232,7 +232,7 @@ class Main extends PluginBase implements Listener
         $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
         if ($config->exists("joinmessages." . $player->getName())) {
             $nachricht = $config->get("joinmessages." . $player->getName());
-            if ($player->hasPermission("jqn.colored.message")) {
+            if ($player->hasPermission("jqm.colored.message")) {
                 $event->setJoinMessage("§8[§a+§8] §r" . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
@@ -249,7 +249,7 @@ class Main extends PluginBase implements Listener
         $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
         if ($config->exists("quidmessages." . $player->getName())) {
             $nachricht = $config->get("quidmessages." . $player->getName());
-            if ($player->hasPermission("jqn.colored.message")) {
+            if ($player->hasPermission("jqm.colored.message")) {
                 $event->setQuitMessage("§8[§c-§8] §r" . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
