@@ -140,7 +140,24 @@ class Main extends PluginBase implements Listener
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
-                if (new DateTime("now") >= $last) {
+                if (!$player->hasPermission("jqm.pass.cooldown")) {
+                    if (new DateTime("now") >= $last) {
+                        $nachricht = $data[0];
+                        $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
+                        $config->set("joinmessages." . $player->getName(), $nachricht);
+                        $config->save();
+                        $messages = $this->message->get("successful-join");
+                        $messages = str_replace('{message}', $nachricht, $messages);
+                        $player->sendMessage($this->prefix . $messages);
+                        $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
+                        $cd->set($player->getName(), $date->format("Y-m-d H:i:s"));
+                        $cd->save();
+                    } else {
+                        $waiting = $this->message->get("join-wait-message");
+                        $waiting = str_replace('{time}', $cd->get($player->getName()), $waiting);
+                        $player->sendMessage($this->prefix . $waiting);
+                    }
+                } else {
                     $nachricht = $data[0];
                     $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
                     $config->set("joinmessages." . $player->getName(), $nachricht);
@@ -148,13 +165,6 @@ class Main extends PluginBase implements Listener
                     $messages = $this->message->get("successful-join");
                     $messages = str_replace('{message}', $nachricht, $messages);
                     $player->sendMessage($this->prefix . $messages);
-                    $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
-                    $cd->set($player->getName(), $date->format("Y-m-d H:i:s"));
-                    $cd->save();
-                } else {
-                    $waiting = $this->message->get("join-wait-message");
-                    $waiting = str_replace('{time}', $cd->get($player->getName()), $waiting);
-                    $player->sendMessage($this->prefix . $waiting);
                 }
             } else {
                 $player->sendMessage($this->prefix . $this->message->get("operation-cancelled"));
@@ -180,7 +190,24 @@ class Main extends PluginBase implements Listener
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
-                if (new DateTime("now") >= $last) {
+                if (!$player->hasPermission("jqm.pass.cooldown")) {
+                    if (new DateTime("now") >= $last) {
+                        $nachricht = $data[0];
+                        $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
+                        $config->set("quidmessages." . $player->getName(), $nachricht);
+                        $config->save();
+                        $messages = $this->message->get("successful-quit");
+                        $messages = str_replace('{message}', $nachricht, $messages);
+                        $player->sendMessage($this->prefix . $messages);
+                        $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
+                        $cd->set($player->getName(), $date->format("Y-m-d H:i:s"));
+                        $cd->save();
+                    } else {
+                        $waiting = $this->message->get("quit-wait-message");
+                        $waiting = str_replace('{time}', $cd->get($player->getName()), $waiting);
+                        $player->sendMessage($this->prefix . $waiting);
+                    }
+                } else {
                     $nachricht = $data[0];
                     $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
                     $config->set("quidmessages." . $player->getName(), $nachricht);
@@ -188,13 +215,6 @@ class Main extends PluginBase implements Listener
                     $messages = $this->message->get("successful-quit");
                     $messages = str_replace('{message}', $nachricht, $messages);
                     $player->sendMessage($this->prefix . $messages);
-                    $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
-                    $cd->set($player->getName(), $date->format("Y-m-d H:i:s"));
-                    $cd->save();
-                } else {
-                    $waiting = $this->message->get("quit-wait-message");
-                    $waiting = str_replace('{time}', $cd->get($player->getName()), $waiting);
-                    $player->sendMessage($this->prefix . $waiting);
                 }
             } else {
                 $player->sendMessage($this->prefix . $this->message->get("operation-cancelled"));
