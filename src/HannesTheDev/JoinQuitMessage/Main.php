@@ -63,10 +63,7 @@ class Main extends PluginBase implements Listener
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->saveResource("joinquitmessages.yml");
         $this->saveResource("messages.yml");
-        $this->saveResource("joincooldown.yml");
-        $this->saveResource("quitcooldown.yml");
         $this->message = new Config($this->getDataFolder() . "messages.yml", Config::YAML);
         $this->prefix = $this->message->get("prefix");
     }
@@ -137,7 +134,6 @@ class Main extends PluginBase implements Listener
                 return true;
             }
             if (!empty($data[0])) {
-                $this->getConfig();
                 $cd = new Config($this->getDataFolder() . "joincooldown.yml", Config::YAML);
                 if (!$cd->exists($player->getName())) {
                     $cd->set($player->getName(), date('Y-m-d H:i:s'));
@@ -178,7 +174,6 @@ class Main extends PluginBase implements Listener
                 return true;
             }
             if (!empty($data[0])) {
-                $this->getConfig();
                 $cd = new Config($this->getDataFolder() . "quitcooldown.yml", Config::YAML);
                 if (!$cd->exists($player->getName())) {
                     $cd->set($player->getName(), date('Y-m-d H:i:s'));
