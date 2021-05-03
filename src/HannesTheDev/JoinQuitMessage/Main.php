@@ -136,7 +136,7 @@ class Main extends PluginBase implements Listener
             if (!empty($data[0])) {
                 $cd = new Config($this->getDataFolder() . "joincooldown.yml", Config::YAML);
                 if (!$cd->exists($player->getName())) {
-                    $cd->set($player->getName(), date('m.d.Y H:i'));
+                    $cd->set($player->getName(), date('Y.m.d H:i:s'));
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
@@ -149,7 +149,7 @@ class Main extends PluginBase implements Listener
                     $messages = str_replace('{message}', $nachricht, $messages);
                     $player->sendMessage($this->prefix . $messages);
                     $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
-                    $cd->set($player->getName(), $date->format("m.d.Y H:i"));
+                    $cd->set($player->getName(), $date->format("Y.m.d H:i:s"));
                     $cd->save();
                 } else {
                     $waiting = $this->message->get("join-wait-message");
@@ -176,7 +176,7 @@ class Main extends PluginBase implements Listener
             if (!empty($data[0])) {
                 $cd = new Config($this->getDataFolder() . "quitcooldown.yml", Config::YAML);
                 if (!$cd->exists($player->getName())) {
-                    $cd->set($player->getName(), date('m.d.Y H:i'));
+                    $cd->set($player->getName(), date('Y.m.d H:i:s'));
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
@@ -189,7 +189,7 @@ class Main extends PluginBase implements Listener
                     $messages = str_replace('{message}', $nachricht, $messages);
                     $player->sendMessage($this->prefix . $messages);
                     $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
-                    $cd->set($player->getName(), $date->format("m.d.Y H:i"));
+                    $cd->set($player->getName(), $date->format("Y.m.d H:i:s"));
                     $cd->save();
                 } else {
                     $waiting = $this->message->get("quit-wait-message");
