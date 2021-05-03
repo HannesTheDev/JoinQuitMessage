@@ -136,7 +136,7 @@ class Main extends PluginBase implements Listener
             if (!empty($data[0])) {
                 $cd = new Config($this->getDataFolder() . "joincooldown.yml", Config::YAML);
                 if (!$cd->exists($player->getName())) {
-                    $cd->set($player->getName(), date('Y-m-d H:i:s'));
+                    $cd->set($player->getName(), date('m.d.Y H:i'));
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
@@ -149,7 +149,7 @@ class Main extends PluginBase implements Listener
                     $messages = str_replace('{message}', $nachricht, $messages);
                     $player->sendMessage($this->prefix . $messages);
                     $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
-                    $cd->set($player->getName(), $date->format("Y-m-d H:i:s"));
+                    $cd->set($player->getName(), $date->format("m.d.Y H:i"));
                     $cd->save();
                 } else {
                     $waiting = $this->message->get("join-wait-message");
@@ -176,7 +176,7 @@ class Main extends PluginBase implements Listener
             if (!empty($data[0])) {
                 $cd = new Config($this->getDataFolder() . "quitcooldown.yml", Config::YAML);
                 if (!$cd->exists($player->getName())) {
-                    $cd->set($player->getName(), date('Y-m-d H:i:s'));
+                    $cd->set($player->getName(), date('m.d.Y H:i'));
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
@@ -189,7 +189,7 @@ class Main extends PluginBase implements Listener
                     $messages = str_replace('{message}', $nachricht, $messages);
                     $player->sendMessage($this->prefix . $messages);
                     $date = new DateTime('+' . $this->message->get("cooldown-minutes") . ' minutes');
-                    $cd->set($player->getName(), $date->format("Y-m-d H:i:s"));
+                    $cd->set($player->getName(), $date->format("m.d.Y H:i"));
                     $cd->save();
                 } else {
                     $waiting = $this->message->get("quit-wait-message");
@@ -213,10 +213,10 @@ class Main extends PluginBase implements Listener
         if ($config->exists("joinmessages." . $player->getName())) {
             $nachricht = $config->get("joinmessages." . $player->getName());
             if ($player->hasPermission("jqn.colored.message")) {
-                $event->setJoinMessage($nachricht);
+                $event->setJoinMessage("§8[§a+§8] §r" . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
-                $event->setJoinMessage("§6" . $nachricht);
+                $event->setJoinMessage("§8[§a+§8] §6" . $nachricht);
             }
         } else {
             $event->setJoinMessage("§8[§a+§8] §7" . $player->getName());
@@ -230,10 +230,10 @@ class Main extends PluginBase implements Listener
         if ($config->exists("quidmessages." . $player->getName())) {
             $nachricht = $config->get("quidmessages." . $player->getName());
             if ($player->hasPermission("jqn.colored.message")) {
-                $event->setQuitMessage($nachricht);
+                $event->setQuitMessage("§8[§c-§8] " . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
-                $event->setQuitMessage("§6" . $nachricht);
+                $event->setQuitMessage("§8[§c-§8] §6" . $nachricht);
             }
         } else {
             $event->setQuitMessage("§8[§c-§8] §7" . $player->getName());
