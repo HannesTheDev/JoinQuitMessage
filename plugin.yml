@@ -1,0 +1,21 @@
+name: JoinQuitMessage
+main: HannesTheDev\JoinQuitMessage\Main
+version: 1.0.0
+api: 3.0.0
+author: HannesTheDev
+
+commands:
+  jqm:
+    aliases: ["joinquitmessage", "jqmessage"]
+    description: "Just change your join and quit message ingame"
+
+permissions:
+  jqm.join.cmd:
+    description: "Just change your join message ingame"
+    default: op
+  jqm.quit.cmd:
+    description: "Just change your quit message ingame"
+    default: op
+  jqm.colored.message:
+    description: "Used colors in your message"
+    default: op
