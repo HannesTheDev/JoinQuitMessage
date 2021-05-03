@@ -11,9 +11,10 @@ Commands | Description | Default | Aliases | Permissions
 ## Permissions
 Permissions | Description | Default
 --------- | ------------------- | -------
-``jym.join.cmd`` | ``Just change your join message ingame`` | ``op``
+``jqm.join.cmd`` | ``Just change your join message ingame`` | ``op``
 ``jqm.quit.cmd`` | ``Just change your quit message ingame`` | ``op``
 ``jqm.colored.message`` | ``Used colors in your message`` | ``op``
+``jqm.pass.cooldown`` | ``Skip the cooldown`` | ``op``
 
 ## Picture
 <img src="https://github.com/HannesTheDev/JoinQuitMessage/blob/main/joinquitmessage.png"></img> <br>
