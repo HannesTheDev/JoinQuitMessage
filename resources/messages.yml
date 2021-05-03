@@ -1,1 +1,27 @@
+# Here you can edit the Messages!
+prefix: "§8[§e§lJQM§r§8] "
+cooldown-minutes: 10
 
+operation-cancelled: "§cOperation canceled..."
+no-permission: "§cYou do not have permission to use this"
+
+join-wait-message: "§cYou can only change your join message again on: §e{time}"
+quit-wait-message: "§cYou can only change your quit message again on: §e{time}"
+
+successful-quit: "§7Your new join message is: §r{message}"
+successful-join: "§7Your new quit message is: §r{message}"
+
+
+1-title: "§8-=§bJoinQuitMessages§8=-"
+1-content: "§7Change your Join or Quit message:"
+1-button-1: "§eJoin\n§r§8[§7Click here§8]"
+1-button-2: "§eQuit\n§r§8[§7Click here§8]"
+1-button-3: "§cCancel\n§r§8[§7Click here§8]"
+
+2-title: "§8-=§bJoinMessage§8=-"
+2-input: "§7Change your join message:"
+
+3-title: "§8-=§bQuitMessage§8=-"
+3-input: "§7Change your Quit message:"
+
+# by HannesTheDev
