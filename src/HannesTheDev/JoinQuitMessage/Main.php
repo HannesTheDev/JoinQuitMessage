@@ -110,7 +110,7 @@ class Main extends PluginBase implements Listener
 
     public function checkJoin(Player $player)
     {
-        if ($player->hasPermission("jqm.join.cmd")) {
+        if ($player->hasPermission("jqm.join.cmd") or $player->hasPermission("joinquitmessage.join.cmd")) {
             $this->openJoin($player);
         } else {
             $player->sendMessage($this->prefix . $this->message->get("no-permission"));
@@ -119,7 +119,7 @@ class Main extends PluginBase implements Listener
 
     public function checkQuit(Player $player)
     {
-        if ($player->hasPermission("jqm.quit.cmd")) {
+        if ($player->hasPermission("jqm.quit.cmd") or $player->hasPermission("joinquitmessage.quit.cmd")) {
             $this->openQuit($player);
         } else {
             $player->sendMessage($this->prefix . $this->message->get("no-permission"));
@@ -140,7 +140,7 @@ class Main extends PluginBase implements Listener
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
-                if (!$player->hasPermission("jqm.pass.cooldown")) {
+                if (!$player->hasPermission("jqm.pass.cooldown") or $player->hasPermission("joinquitmessage.pass.cooldown")) {
                     if (new DateTime("now") >= $last) {
                         $nachricht = $data[0];
                         $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
@@ -190,7 +190,7 @@ class Main extends PluginBase implements Listener
                     $cd->save();
                 }
                 $last = new DateTime($cd->get($player->getName()));
-                if (!$player->hasPermission("jqm.pass.cooldown")) {
+                if (!$player->hasPermission("jqm.pass.cooldown") or $player->hasPermission("joinquitmessage.pass.cooldown")) {
                     if (new DateTime("now") >= $last) {
                         $nachricht = $data[0];
                         $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
@@ -232,7 +232,7 @@ class Main extends PluginBase implements Listener
         $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
         if ($config->exists("joinmessages." . $player->getName())) {
             $nachricht = $config->get("joinmessages." . $player->getName());
-            if ($player->hasPermission("jqm.colored.message")) {
+            if ($player->hasPermission("jqm.colored.message") or $player->hasPermission("joinquitmessage.colored.message")) {
                 $event->setJoinMessage("§8[§a+§8] §r" . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
@@ -249,7 +249,7 @@ class Main extends PluginBase implements Listener
         $config = new Config($this->getDataFolder() . "joinquitmessages.yml", Config::YAML);
         if ($config->exists("quidmessages." . $player->getName())) {
             $nachricht = $config->get("quidmessages." . $player->getName());
-            if ($player->hasPermission("jqm.colored.message")) {
+            if ($player->hasPermission("jqm.colored.message") or $player->hasPermission("joinquitmessage.colored.message")) {
                 $event->setQuitMessage("§8[§c-§8] §r" . $nachricht);
             } else {
                 $nachricht = $this->replaceWords($nachricht);
